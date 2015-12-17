@@ -1,1 +1,0 @@
-../../../../../../VideoCore/sources/iOS/CameraSource.h

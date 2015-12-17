@@ -1,1 +1,0 @@
-../../../../glm/glm/core/intrinsic_exponential.inl
