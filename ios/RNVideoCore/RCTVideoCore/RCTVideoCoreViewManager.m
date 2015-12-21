@@ -23,6 +23,7 @@ RCT_EXPORT_MODULE();
 
 - (UIView *) view
 {
+  self.videoCoreView = [[RCTVideoCoreView alloc] init];
   return self.videoCoreView;
 }
 
@@ -31,7 +32,6 @@ RCT_EXPORT_MODULE();
   self = [super init];
   if ( self ) {
     NSLog(@"RCTVideoCoreViewManager init");
-    self.videoCoreView = [[RCTVideoCoreView alloc] init];
   }
   return self;
 }
