@@ -10,12 +10,21 @@
 
 @implementation RCTVideoCoreView
 
-- (id)initWithManager:(RCTVideoCoreViewManager *)manager bridge:(RCTBridge *)bridge
+
+- (instancetype)initWithFrame:(CGRect)frame {
+  NSLog(@"init with frame: %@", NSStringFromCGRect(frame));
+  self = [super initWithFrame:frame];
+  if ( self ) {
+    [self setUp];
+  }
+  return self;
+}
+
+- (void)setUp
 {
-  if ((self = [super init])) {
     CGRect rect = [[UIScreen mainScreen] bounds];
-    
-    _session = [[VCSimpleSession alloc] initWithVideoSize:rect.size frameRate:30 bitrate:1000000 useInterfaceOrientation:YES  cameraState:VCCameraStateBack aspectMode:VCAscpectModeFill];
+  
+    _session = [[VCSimpleSession alloc] initWithVideoSize:rect.size frameRate:30 bitrate:1000000 useInterfaceOrientation:YES  cameraState:VCCameraStateFront aspectMode:VCAscpectModeFill];
     _session.orientationLocked = YES;
     _session.useAdaptiveBitrate = YES;
     _session.delegate = self;
@@ -24,11 +33,8 @@
     [self addSubview:_session.previewView];
     
     [_session startRtmpSessionWithURL:@"rtmp://104.155.71.82:1935/live" andStreamKey:@"myStream"];
-    
-  }
-  
-  return self;
 }
+
 
 - (void) connectionStatusChanged:(VCSessionState) state
 {

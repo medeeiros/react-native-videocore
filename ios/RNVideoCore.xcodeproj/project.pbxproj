@@ -243,7 +243,6 @@
 		13B07FAE1A68108700A75B9A /* RNVideoCore */ = {
 			isa = PBXGroup;
 			children = (
-				33E48B9A1C2311590085F669 /* RCTVideoCoreSwift */,
 				33E48B8F1C2311430085F669 /* RCTVideoCore */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -273,13 +272,6 @@
 				33E48B9F1C2311D00085F669 /* RCTVideoCoreViewManager.m */,
 			);
 			name = RCTVideoCore;
-			sourceTree = "<group>";
-		};
-		33E48B9A1C2311590085F669 /* RCTVideoCoreSwift */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = RCTVideoCoreSwift;
 			sourceTree = "<group>";
 		};
 		78C398B11ACF4ADC00677621 /* Products */ = {

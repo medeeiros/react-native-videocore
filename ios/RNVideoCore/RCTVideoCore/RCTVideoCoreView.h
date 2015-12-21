@@ -14,6 +14,6 @@
 @interface RCTVideoCoreView : RCTView <VCSessionDelegate>
 
 @property (nonatomic, retain) VCSimpleSession* session;
-- (id)initWithManager:(RCTVideoCoreViewManager*)manager bridge:(RCTBridge *)bridge;
+
 
 @end

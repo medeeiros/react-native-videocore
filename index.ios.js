@@ -11,16 +11,26 @@ var {
   Text,
   View,
   requireNativeComponent,
-  NativeModules
+  NativeModules,
+  TouchableHighlight
 } = React;
 
 var VideoCoreView = requireNativeComponent('RCTVideoCoreView', null);
 
 var RNVideoCore = React.createClass({
+  getInitialState: function() {
+    return {
+      showPreview: false
+    }
+  },
   render: function() {
+    var previewOrButton = (this.state.showPreview) ?
+      <VideoCoreView style={{position: 'absolute', top: 0 }} /> :
+      <TouchableHighlight onPress={() => this.setState({showPreview: true})}><Text>Open Streaming</Text></TouchableHighlight>
+
     return (
       <View style={styles.container}>
-        <VideoCoreView style={{position: 'absolute', top: 0 }} />
+        {previewOrButton}
       </View>
     );
   }
