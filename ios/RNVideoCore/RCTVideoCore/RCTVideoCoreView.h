@@ -13,7 +13,7 @@
 
 @interface RCTVideoCoreView : RCTView <VCSessionDelegate>
 
-@property (nonatomic, retain) VCSimpleSession* session;
+//@property (nonatomic, retain) VCSimpleSession* session;
 
 
 @end

@@ -10,29 +10,34 @@
 
 @implementation RCTVideoCoreView
 
+static VCSimpleSession *aSession;
 
 - (instancetype)initWithFrame:(CGRect)frame {
   NSLog(@"init with frame: %@", NSStringFromCGRect(frame));
   self = [super initWithFrame:frame];
   if ( self ) {
-    [self setUp];
+    if(!aSession) {
+      [self setUp];
+    }
   }
   return self;
 }
 
+- (void)didMoveToWindow {
+  NSLog(@"did move to window");
+  [self addSubview:aSession.previewView];
+}
+
 - (void)setUp
 {
-    CGRect rect = [[UIScreen mainScreen] bounds];
+  CGRect rect = [[UIScreen mainScreen] bounds];
   
-    _session = [[VCSimpleSession alloc] initWithVideoSize:rect.size frameRate:30 bitrate:1000000 useInterfaceOrientation:YES  cameraState:VCCameraStateFront aspectMode:VCAscpectModeFill];
-    _session.orientationLocked = YES;
-    _session.useAdaptiveBitrate = YES;
-    _session.delegate = self;
-    _session.previewView.frame = rect;
-    
-    [self addSubview:_session.previewView];
-    
-    [_session startRtmpSessionWithURL:@"rtmp://104.155.71.82:1935/live" andStreamKey:@"myStream"];
+  aSession = [[VCSimpleSession alloc] initWithVideoSize:rect.size frameRate:30 bitrate:1000000 useInterfaceOrientation:YES  cameraState:VCCameraStateFront aspectMode:VCAscpectModeFill];
+  aSession.orientationLocked = YES;
+  aSession.useAdaptiveBitrate = YES;
+  aSession.delegate = self;
+  aSession.previewView.frame = rect;
+
 }
 
 
