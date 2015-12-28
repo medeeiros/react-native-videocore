@@ -1,11 +1,17 @@
 {
-  "name": "RNVideoCore",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "react-native start"
+  "name": "react-native-videocore",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/GuilhermeMedeiros/react-native-videocore"
   },
-  "dependencies": {
-    "react-native": "^0.16.0"
-  }
+  "description": "A react-native wrapper for the VideoCore iOS library",
+  "version": "0.0.1",
+  "nativePackage": true,
+  "keywords": [
+    "react-native",
+    "react",
+    "camera",
+    "streaming",
+    "videocore"
+  ]
 }

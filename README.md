@@ -1,7 +1,14 @@
-# VideoCore + React Native
+# react-native-videocore
+> A React Native module for the [VideoCore](https://github.com/jgh-/VideoCore) iOS library.
 
-## Install Pods on the ios folder: `cd ./ios`
-- Because there is a bug with latest cocoapods version you need to run `sudo gem install cocoapods -v 0.37.2 && pod _0.37.2_ install`
 
-## Run on iOS
-Open `RNVideoCore.xcworkspace` with Xcode
+## Getting started
+
+
+## Usage
+
+
+
+
+-------------
+Thanks to Loch Wansbrough (@lwansbrough) for the react-native-camera module which provided me with a great example of how to set up this module.
