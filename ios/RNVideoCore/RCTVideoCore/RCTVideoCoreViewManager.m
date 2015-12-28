@@ -9,31 +9,28 @@
 #import "RCTVideoCoreViewManager.h"
 #import "RCTVideoCoreView.h"
 
-@interface RCTVideoCoreViewManager()
-
-@property (nonatomic) RCTVideoCoreView * videoCoreView;
-
-@end
-
-
-
 @implementation RCTVideoCoreViewManager
 
 RCT_EXPORT_MODULE();
 
+@synthesize bridge = _bridge;
+
 - (UIView *) view
 {
-  self.videoCoreView = [[RCTVideoCoreView alloc] init];
-  return self.videoCoreView;
+  return [[RCTVideoCoreView alloc] initWithEventDispatcher:self.bridge.eventDispatcher];
 }
 
-- (instancetype) init
+- (dispatch_queue_t)methodQueue
 {
-  self = [super init];
-  if ( self ) {
-    NSLog(@"RCTVideoCoreViewManager init");
-  }
-  return self;
+  return dispatch_get_main_queue();
+}
+
+RCT_EXPORT_METHOD(startStreaming: (NSString *)streamUrl andStreamKey:(NSString *) streamKey) {
+  [RCTVideoCoreView startStream:streamUrl andStreamKey:streamKey];
+}
+
+RCT_EXPORT_METHOD(stopStreaming) {
+  [RCTVideoCoreView stopStream];
 }
 
 

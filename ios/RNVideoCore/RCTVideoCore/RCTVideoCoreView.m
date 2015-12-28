@@ -10,74 +10,125 @@
 
 @implementation RCTVideoCoreView
 
-static VCSimpleSession *aSession;
+static VCSimpleSession* session;
 
-- (instancetype)initWithFrame:(CGRect)frame {
-  NSLog(@"init with frame: %@", NSStringFromCGRect(frame));
-  self = [super initWithFrame:frame];
-  if ( self ) {
-    if(!aSession) {
-      [self setUp];
-    }
-  }
-  return self;
-}
-
-- (void)didMoveToWindow {
-  NSLog(@"did move to window");
-  [self addSubview:aSession.previewView];
-}
-
-- (void)setUp
+- (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher
 {
-  CGRect rect = [[UIScreen mainScreen] bounds];
   
-  aSession = [[VCSimpleSession alloc] initWithVideoSize:rect.size frameRate:30 bitrate:1000000 useInterfaceOrientation:YES  cameraState:VCCameraStateFront aspectMode:VCAscpectModeFill];
-  aSession.orientationLocked = YES;
-  aSession.useAdaptiveBitrate = YES;
-  aSession.delegate = self;
-  aSession.previewView.frame = rect;
-
+  if(!session) {
+    [self setUp];
+  }
+  
+  session.delegate = self;
+  _eventDispatcher = eventDispatcher;
+  return [super initWithFrame:CGRectZero];
 }
 
+
+- (void) setUp
+{
+
+  CGRect rect = [[UIScreen mainScreen] bounds];
+
+  session = [[VCSimpleSession alloc] initWithVideoSize:CGSizeMake(rect.size.height, rect.size.width) frameRate:30 bitrate:1000000 useInterfaceOrientation:YES  cameraState:VCCameraStateBack];
+  session.orientationLocked = NO;
+  session.useAdaptiveBitrate = YES;
+  
+}
+
+
+RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
+RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
+
+- (void)removeFromSuperview
+{
+  NSLog(@"---------------- REMOVE FROM SUPERVIEW");
+  
+  self.eventDispatcher = nil;
+  session.delegate = nil;
+  [super removeFromSuperview];
+}
+
+- (void)didMoveToWindow
+{
+  NSLog(@"------------ DID MOVE TO WINDOW");
+  [self addSubview:session.previewView];
+  
+  // Get the subviews of the view
+  NSArray *subviews = [self subviews];
+  
+  // Return if there are no subviews
+  if ([subviews count] == 0) return; // COUNT CHECK LINE
+  
+  for (UIView *subview in subviews) {
+    // Do what you want to do with the subview
+    NSLog(@"%@", subview);
+  }
+  
+}
+
+- (void) layoutSubviews
+{
+  NSLog(@"------------ LAYOUT SUBVIEWS");
+  
+  session.previewView.frame = self.bounds;
+  
+  
+  [self sendSubviewToBack:session.previewView];
+  [super layoutSubviews];
+}
+
++ (void) startStream:(NSString *)streamUrl andStreamKey:(NSString *)streamKey
+{
+  
+  NSLog(@"startStream");
+  [session startRtmpSessionWithURL:streamUrl andStreamKey:streamKey];
+}
+
++ (void) stopStream
+{
+  NSLog(@"stopStream");
+  [session endRtmpSession];
+}
 
 - (void) connectionStatusChanged:(VCSessionState) state
 {
   
+  NSString* eventName;
+  
   switch(state) {
     case VCSessionStateStarting:
-      NSLog(@"VCSessionStateStarting");
-//      [self.btnConnect setTitle:@"Connecting" forState:UIControlStateNormal];
+      eventName = @"VCSessionStateStarting";
       break;
+      
     case VCSessionStateStarted:
-      NSLog(@"VCSessionStateStarted");
-//      [self.btnConnect setTitle:@"Disconnect" forState:UIControlStateNormal];
+      eventName = @"VCSessionStateStarted";
       break;
       
     case VCSessionStateError:
-      NSLog(@"VCSessionStateError");
-//      [self.btnConnect setTitle:@"Disconnect" forState:UIControlStateNormal];
+      eventName = @"VCSessionStateError";
       break;
       
     case VCSessionStateEnded:
-      NSLog(@"VCSessionStateEnded");
-//      [self.btnConnect setTitle:@"Disconnect" forState:UIControlStateNormal];
+      eventName = @"VCSessionStateEnded";
       break;
       
     case VCSessionStateNone:
-      NSLog(@"VCSessionStateNone");
-//      [self.btnConnect setTitle:@"Disconnect" forState:UIControlStateNormal];
+      eventName = @"VCSessionStateNone";
       break;
       
     case VCSessionStatePreviewStarted:
-      NSLog(@"VCSessionStatePreviewStarted");
+      eventName = @"VCSessionStatePreviewStarted";
       break;
       
     default:
-      NSLog(@"default");
-//      [self.btnConnect setTitle:@"Connect" forState:UIControlStateNormal];
+      eventName = @"default";
       break;
   }
+  
+  NSLog(@"%@", eventName);
+  
+  [self.eventDispatcher sendDeviceEventWithName:@"videocore.connectionStatusChanged" body:eventName];
 }
 
 

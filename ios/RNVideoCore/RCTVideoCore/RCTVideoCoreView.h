@@ -6,14 +6,18 @@
 //  Copyright © 2015 Facebook. All rights reserved.
 //
 
-#import "RCTView.h"
-#import "RCTVideoCoreViewManager.h"
 #import "VCSimpleSession.h"
-#import "RCTBridge.h"
+#import "RCTEventDispatcher.h"
 
-@interface RCTVideoCoreView : RCTView <VCSessionDelegate>
+@class RCTVideoCoreViewManager;
 
-//@property (nonatomic, retain) VCSimpleSession* session;
+@interface RCTVideoCoreView : UIView <VCSessionDelegate>
 
+@property (nonatomic) RCTEventDispatcher *eventDispatcher;
+
++ (void) startStream:(NSString *)streamUrl andStreamKey:(NSString *)streamKey;
++ (void) stopStream;
+
+- (instancetype) initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher NS_DESIGNATED_INITIALIZER;
 
 @end

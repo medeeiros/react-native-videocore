@@ -1,8 +1,8 @@
 {
   "name": "react-native-videocore",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/GuilhermeMedeiros/react-native-videocore"
+    "type": "git",
+    "url": "https://github.com/GuilhermeMedeiros/react-native-videocore"
   },
   "description": "A react-native wrapper for the VideoCore iOS library",
   "version": "0.0.1",
@@ -13,5 +13,6 @@
     "camera",
     "streaming",
     "videocore"
-  ]
+  ],
+  "dependencies": {}
 }
