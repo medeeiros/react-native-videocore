@@ -131,5 +131,16 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
   [self.eventDispatcher sendDeviceEventWithName:@"videocore.connectionStatusChanged" body:eventName];
 }
 
++(void) toggleTorch {
+  [session setTorch:!session.torch];
+}
+
++(void) flipCamera {
+  if (session.cameraState == VCCameraStateBack) {
+    [session setCameraState:VCCameraStateFront];
+  } else {
+    [session setCameraState:VCCameraStateBack];
+  }
+}
 
 @end

@@ -48,12 +48,20 @@ export class VideoCore extends Component {
         return <VideoCoreView {...this.props} />
     }
 
-    static startStreaming(url, key) {
+    startStreaming(url, key) {
         NativeModules.VideoCoreViewManager.startStreaming(url, key)
     }
 
-    static stopStreaming() {
+    stopStreaming() {
         NativeModules.VideoCoreViewManager.stopStreaming()
+    }
+
+    toggleTorch() {
+        NativeModules.VideoCoreViewManager.toggleTorch()
+    }
+
+    flipCamera() {
+        NativeModules.VideoCoreViewManager.flipCamera()
     }
 };
 
