@@ -23,4 +23,7 @@
 +(void) toggleTorch;
 +(void) flipCamera;
 
++(void)setResolution:(int)width andHeight:(int)height;
++(void)setBitrate:(int)bitrate;
+
 @end

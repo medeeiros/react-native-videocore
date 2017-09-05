@@ -41,4 +41,14 @@ RCT_EXPORT_METHOD(flipCamera) {
   [RCTVideoCoreView flipCamera];
 }
 
+RCT_EXPORT_METHOD(setResolution:(int)width andHeight:(int)height) {
+  [RCTVideoCoreView setResolution:width andHeight:height];
+}
+
+RCT_EXPORT_METHOD(setBitrate:(int)bitrate) {
+  [RCTVideoCoreView setBitrate:bitrate];
+}
+
+
+
 @end

@@ -49,19 +49,27 @@ export class VideoCore extends Component {
     }
 
     startStreaming(url, key) {
-        NativeModules.VideoCoreViewManager.startStreaming(url, key)
+        NativeModules.VideoCoreViewManager.startStreaming(url, key);
     }
 
     stopStreaming() {
-        NativeModules.VideoCoreViewManager.stopStreaming()
+        NativeModules.VideoCoreViewManager.stopStreaming();
     }
 
     toggleTorch() {
-        NativeModules.VideoCoreViewManager.toggleTorch()
+        NativeModules.VideoCoreViewManager.toggleTorch();
     }
 
     flipCamera() {
-        NativeModules.VideoCoreViewManager.flipCamera()
+        NativeModules.VideoCoreViewManager.flipCamera();
+    }
+
+    setResolution(width, height) {
+        NativeModules.VideoCoreViewManager.setResolution(width, height);
+    }
+
+    setBitrate(bitrate) {
+        NativeModules.VideoCoreViewManager.setBitrate(bitrate);
     }
 };
 
