@@ -49,6 +49,8 @@ RCT_EXPORT_METHOD(setBitrate:(int)bitrate) {
   [RCTVideoCoreView setBitrate:bitrate];
 }
 
-
+RCT_EXPORT_METHOD(setFps:(int)fps) {
+  [RCTVideoCoreView setFps:fps];
+}
 
 @end

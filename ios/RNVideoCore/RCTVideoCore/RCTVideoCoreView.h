@@ -25,5 +25,6 @@
 
 +(void)setResolution:(int)width andHeight:(int)height;
 +(void)setBitrate:(int)bitrate;
++(void)setFps:(int)fps;
 
 @end

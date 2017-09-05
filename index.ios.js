@@ -71,6 +71,10 @@ export class VideoCore extends Component {
     setBitrate(bitrate) {
         NativeModules.VideoCoreViewManager.setBitrate(bitrate);
     }
+
+    setFps(fps) {
+        NativeModules.VideoCoreViewManager.setFps(fps);
+    }
 };
 
 

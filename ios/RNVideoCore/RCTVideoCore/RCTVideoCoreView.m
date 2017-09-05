@@ -162,6 +162,10 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
   [session setBitrate:bitrate];
 }
 
++(void)setFps:(int)fps {
+  [session setFps:fps];
+}
+
 +(void) saveDefaultNumber:(NSNumber *)number forKey:(NSString *)key
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
