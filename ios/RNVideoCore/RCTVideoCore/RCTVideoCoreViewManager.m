@@ -33,5 +33,24 @@ RCT_EXPORT_METHOD(stopStreaming) {
   [RCTVideoCoreView stopStream];
 }
 
+RCT_EXPORT_METHOD(toggleTorch) {
+  [RCTVideoCoreView toggleTorch];
+}
+
+RCT_EXPORT_METHOD(flipCamera) {
+  [RCTVideoCoreView flipCamera];
+}
+
+RCT_EXPORT_METHOD(setResolution:(int)width andHeight:(int)height) {
+  [RCTVideoCoreView setResolution:width andHeight:height];
+}
+
+RCT_EXPORT_METHOD(setBitrate:(int)bitrate) {
+  [RCTVideoCoreView setBitrate:bitrate];
+}
+
+RCT_EXPORT_METHOD(setFps:(int)fps) {
+  [RCTVideoCoreView setFps:fps];
+}
 
 @end

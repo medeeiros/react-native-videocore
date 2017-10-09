@@ -7,7 +7,7 @@
 //
 
 #import "VCSimpleSession.h"
-#import "RCTEventDispatcher.h"
+#import <React/RCTEventDispatcher.h>
 
 @class RCTVideoCoreViewManager;
 
@@ -19,5 +19,12 @@
 + (void) stopStream;
 
 - (instancetype) initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher NS_DESIGNATED_INITIALIZER;
+
++(void) toggleTorch;
++(void) flipCamera;
+
++(void)setResolution:(int)width andHeight:(int)height;
++(void)setBitrate:(int)bitrate;
++(void)setFps:(int)fps;
 
 @end
